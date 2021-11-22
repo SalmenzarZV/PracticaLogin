@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.di.almenzarjimenezsergio.practicalogin.databinding.FragmentFirstBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -54,6 +55,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             izvAccounts = new ArrayList<>();
             Log.v("jamaica", "b");
         }
+        Log.v("jamaica", bundle.toString());
     }
 
     private void setButtonListeners() {
@@ -72,23 +74,43 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btLogin:
-                    checkLogin();
+                String email = binding.tietEmail.getText().toString();
+                String pass = binding.tietPassword.getText().toString();
+                    if (checkLogin(email, pass)){
+                        bundle.putParcelableArrayList("accounts", izvAccounts);
+                        NavHostFragment.findNavController(FirstFragment.this)
+                                .navigate(R.id.action_FirstFragment_to_thirdFragment, bundle);
+                    } else {
+                        Snackbar mySnackbar;
+                        mySnackbar = Snackbar.make(binding.btLogin, "Usuario y/o cContraseña incorrectos", Snackbar.LENGTH_SHORT);
+                        mySnackbar.show();
+                    }
                 break;
             case R.id.btSignin:
-                fragmentManagement();
+                
+                bundle.putParcelableArrayList("accounts", izvAccounts);
                 NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                        .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
                 break;
         }
     }
 
-    private void fragmentManagement() {
-        bundle.putParcelableArrayList("accounts", izvAccounts);
-        Fragment secondFragment = new SecondFragment();
-        secondFragment.setArguments(bundle);
+    private boolean checkLogin(String email, String pass) {
+        for (IZVAccount account: izvAccounts) {
+            if (account.getEmail().equals(email) &&
+                account.getPassword().equals(pass)){
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    private void checkLogin() {
 
+    @Override
+    public String toString() {
+        return "FirstFragment{" +
+                "izvAccounts=" + izvAccounts +
+                '}';
     }
 }
