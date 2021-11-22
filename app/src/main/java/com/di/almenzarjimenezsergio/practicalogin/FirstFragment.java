@@ -1,23 +1,32 @@
 package com.di.almenzarjimenezsergio.practicalogin;
 
+import android.accounts.Account;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.di.almenzarjimenezsergio.practicalogin.databinding.FragmentFirstBinding;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
-public class FirstFragment extends Fragment {
+public class FirstFragment extends Fragment implements View.OnClickListener {
 
     private FragmentFirstBinding binding;
+    Bundle bundle;
+    ArrayList<IZVAccount> izvAccounts;
 
     @Override
     public View onCreateView(
@@ -34,44 +43,22 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String tietEmail = binding.tietEmail.getText().toString();
-        TextWatcher twEmail = new TextWatcher() {
+        setButtonListeners();
 
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                //control de caracteres especiales
-
-                if (!(specialChars(tietEmail)) && tietEmail.contains("@")){
-                    String domain = tietEmail.split("@")[1];
-                    if (domain.equalsIgnoreCase("ieszaidinvergeles.org")){
-
-                    } else {
-
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        };
+        try{
+            bundle = getArguments();
+            izvAccounts = bundle.getParcelableArrayList("accounts");
+            Log.v("jamaica", "a");
+        } catch (Exception e) {
+            bundle = new Bundle();
+            izvAccounts = new ArrayList<>();
+            Log.v("jamaica", "b");
+        }
     }
 
-    public boolean specialChars(String string){
-        String validChars = "qwertyuiopasdfghjklzxcvbnm-_.@";
-        for (int i = 0; i < string.length(); i++){
-            if (validChars.contains(Character.toString(string.charAt(i)))){
-                return true;
-            }
-        }
-
-        return false;
+    private void setButtonListeners() {
+        binding.btLogin.setOnClickListener(this);
+        binding.btSignin.setOnClickListener(this);
     }
 
     @Override
@@ -80,4 +67,28 @@ public class FirstFragment extends Fragment {
         binding = null;
     }
 
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btLogin:
+                    checkLogin();
+                break;
+            case R.id.btSignin:
+                fragmentManagement();
+                NavHostFragment.findNavController(FirstFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                break;
+        }
+    }
+
+    private void fragmentManagement() {
+        bundle.putParcelableArrayList("accounts", izvAccounts);
+        Fragment secondFragment = new SecondFragment();
+        secondFragment.setArguments(bundle);
+    }
+
+    private void checkLogin() {
+
+    }
 }

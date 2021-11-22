@@ -7,85 +7,91 @@
     tools:context=".FirstFragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etEmail"
+        android:id="@+id/etEmailSign"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
         android:hint="@string/email"
-        app:layout_constraintBottom_toTopOf="@+id/etPassword"
+        app:layout_constraintBottom_toTopOf="@+id/etPasswordSign"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivLogo"
+        app:layout_constraintTop_toTopOf="parent"
         app:startIconDrawable="@drawable/ic_outline_person_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tietEmail"
+            android:id="@+id/tietEmailSign"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
+            android:minWidth="@dimen/dp_300"
             tools:ignore="TextContrastCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etPassword"
+        android:id="@+id/etPasswordSign"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:maxWidth="100dp"
         app:counterEnabled="true"
         app:counterMaxLength="8"
-        app:layout_constraintBottom_toTopOf="@+id/btLogin"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivLogo"
+        app:layout_constraintTop_toBottomOf="@+id/etEmailSign"
+        app:layout_constraintWidth_min="wrap"
         app:passwordToggleEnabled="true"
         app:startIconDrawable="@drawable/ic_outline_password_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tietPassword"
+            android:id="@+id/tietPasswordSign"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:maxLength="8"
+            android:minWidth="@dimen/dp_300"
             tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/ivLogo"
-        android:layout_width="0dp"
+        android:layout_width="368dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
         android:contentDescription="@string/ivLogo"
-        android:scaleType="fitCenter"
+        android:scaleType="centerInside"
         android:src="@drawable/logoizv"
-        app:layout_constraintBottom_toTopOf="@+id/etEmail"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/etPasswordSign"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/etEmailSign" />
 
     <Button
         android:id="@+id/btLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/btLogin"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/etPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/etPasswordSign"
+        app:layout_constraintTop_toBottomOf="@+id/etPasswordSign" />
 
     <Button
         android:id="@+id/btSignin"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/btSignin"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/etPassword" />
+        app:layout_constraintEnd_toStartOf="@+id/btLogin"
+        app:layout_constraintTop_toBottomOf="@+id/etPasswordSign" />
 </androidx.constraintlayout.widget.ConstraintLayout>

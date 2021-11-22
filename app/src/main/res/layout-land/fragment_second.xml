@@ -10,38 +10,36 @@
         android:id="@+id/ivLogo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/ivLogo"
         android:src="@drawable/logoizv"
-        app:layout_constraintBottom_toTopOf="@+id/etEmailSign"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/etConfirmPassword"
+        app:layout_constraintEnd_toStartOf="@+id/etPasswordSign"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/etEmailSign" />
 
     <Button
         android:id="@+id/btCreateAc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/create_account"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/etConfirmPassword"
+        app:layout_constraintTop_toBottomOf="@+id/etConfirmPassword" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etEmailSign"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         android:hint="@string/email"
+        android:minWidth="400dp"
         app:layout_constraintBottom_toTopOf="@+id/etPasswordSign"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:startIconDrawable="@drawable/ic_outline_person_24">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -56,16 +54,16 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etPasswordSign"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:minWidth="400dp"
         app:counterEnabled="true"
         app:counterMaxLength="8"
         app:layout_constraintBottom_toTopOf="@+id/etConfirmPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etEmailSign"
         app:passwordToggleEnabled="true"
         app:startIconDrawable="@drawable/ic_outline_password_24">
 
@@ -82,16 +80,16 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etConfirmPassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:minWidth="400dp"
         app:counterEnabled="true"
         app:counterMaxLength="8"
         app:layout_constraintBottom_toTopOf="@+id/btCreateAc"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPasswordSign"
         app:passwordToggleEnabled="true"
         app:startIconDrawable="@drawable/ic_outline_password_24">
 
